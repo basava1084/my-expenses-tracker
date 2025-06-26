@@ -1,0 +1,16 @@
+<body>
+  <div class="container">
+    <h1>Personal Expense Tracker</h1>
+    <a href="/add">Add Expense</a>
+    <a href="/summary">View Summary</a>
+
+    <h2>All Expenses</h2>
+    {% for e in expenses %}
+      <div class="expense-card">
+        <p><strong>Date:</strong> {{ e.date }}</p>
+        <p><strong>Amount:</strong> ₹{{ e.amount }}</p>
+        <p><strong>Category:</strong> {{ e.category }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</body>

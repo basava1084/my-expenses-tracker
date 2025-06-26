@@ -1,0 +1,22 @@
+[
+    {
+        "amount": 123.0,
+        "category": "123",
+        "date": "2025-06-26"
+    },
+    {
+        "amount": 1000.0,
+        "category": "tiffin",
+        "date": "2025-06-27"
+    },
+    {
+        "amount": 1200.0,
+        "category": "mutton",
+        "date": "2025-06-25"
+    },
+    {
+        "amount": 1222.0,
+        "category": "lunch",
+        "date": "2025-06-26"
+    }
+]
