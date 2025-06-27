@@ -1,98 +1,121 @@
-/* General Reset */
+/* style.css for Personal Expense Tracker with improved background and modern UI */
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Body Styling */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #f5f7fa, #b2c1d9);
-  color: #333;
-  padding: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #89f7fe, #66a6ff);
+    color: #333;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-attachment: fixed;
 }
 
-/* Header */
-h1 {
-  text-align: center;
-  color: #2c3e50;
-  margin-bottom: 30px;
-}
-
-/* Navigation Links */
-a {
-  display: inline-block;
-  margin: 10px 5px;
-  padding: 10px 15px;
-  text-decoration: none;
-  color: #fff;
-  background-color: #2980b9;
-  border-radius: 6px;
-  transition: background-color 0.3s ease;
-}
-
-a:hover {
-  background-color: #1c5980;
-}
-
-/* Container */
 .container {
-  max-width: 800px;
-  margin: auto;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    width: 95%;
+    max-width: 600px;
+    backdrop-filter: blur(10px);
 }
 
-/* Expense List */
-.expense-card {
-  background-color: #ffffff;
-  margin: 10px 0;
-  padding: 15px;
-  border-left: 6px solid #3498db;
-  border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+h1, h2 {
+    text-align: center;
+    color: #1f2f46;
+    margin-bottom: 20px;
 }
 
-.expense-card p {
-  margin: 4px 0;
+.button, .nav-buttons a {
+    display: inline-block;
+    text-align: center;
+    margin: 10px 5px;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-weight: 500;
 }
 
-/* Form Styling */
+.button:hover, .nav-buttons a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.expense-card, .summary-item {
+    background: #ffffff;
+    padding: 18px;
+    border-left: 6px solid #764ba2;
+    border-radius: 12px;
+    margin: 12px 0;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.expense-card:hover, .summary-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+}
+
 form {
-  max-width: 500px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form label {
+    font-weight: 600;
+    color: #2c3e50;
 }
 
 form input[type="text"],
 form input[type="number"],
 form input[type="date"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form input[type="date"]:focus {
+    border-color: #764ba2;
+    box-shadow: 0 0 8px rgba(118, 75, 162, 0.3);
+    outline: none;
 }
 
 form input[type="submit"] {
-  background-color: #27ae60;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
+    padding: 12px;
+    background: linear-gradient(135deg, #43cea2, #185a9d);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
 form input[type="submit"]:hover {
-  background-color: #1e8449;
+    background: linear-gradient(135deg, #36b192, #154c8c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
 }
 
-/* Summary List */
-.summary-item {
-  background-color: #ecf0f1;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 6px;
+.no-expenses {
+    text-align: center;
+    color: #555;
+    font-style: italic;
+    margin-top: 12px;
 }

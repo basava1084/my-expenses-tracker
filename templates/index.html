@@ -1,16 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Expense Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .card {
+            border-radius: 12px;
+        }
+    </style>
+</head>
 <body>
-  <div class="container">
-    <h1>Personal Expense Tracker</h1>
-    <a href="/add">Add Expense</a>
-    <a href="/summary">View Summary</a>
-
-    <h2>All Expenses</h2>
-    {% for e in expenses %}
-      <div class="expense-card">
-        <p><strong>Date:</strong> {{ e.date }}</p>
-        <p><strong>Amount:</strong> ₹{{ e.amount }}</p>
-        <p><strong>Category:</strong> {{ e.category }}</p>
-      </div>
-    {% endfor %}
-  </div>
+    <div class="container py-5">
+        <h1 class="text-center fw-bold mb-4">Personal Expense Tracker</h1>
+        <div class="text-center mb-4">
+            <a href="/add" class="btn btn-primary me-2">➕ Add Expense</a>
+            <a href="/summary" class="btn btn-success">📊 View Summary</a>
+        </div>
+        <h2 class="text-center mb-3">All Expenses</h2>
+        {% for e in expenses %}
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+                <p class="mb-1"><strong>📅 Date:</strong> {{ e.date }}</p>
+                <p class="mb-1"><strong>💰 Amount:</strong> ₹{{ e.amount }}</p>
+                <p class="mb-0"><strong>🗂️ Category:</strong> {{ e.category }}</p>
+            </div>
+        </div>
+        {% else %}
+        <p class="text-center">No expenses added yet.</p>
+        {% endfor %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+</html>

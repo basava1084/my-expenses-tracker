@@ -18,5 +18,15 @@
         "amount": 1222.0,
         "category": "lunch",
         "date": "2025-06-26"
+    },
+    {
+        "amount": 60000.0,
+        "category": "rent",
+        "date": "2025-06-27"
+    },
+    {
+        "amount": 1000.0,
+        "category": "birthday",
+        "date": "2025-06-25"
     }
 ]

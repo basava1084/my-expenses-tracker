@@ -1,4 +1,5 @@
-# app.py
+# app.py for running the Personal Expense Tracker UI
+
 from flask import Flask, render_template, request, redirect, url_for
 import json
 from datetime import datetime
@@ -26,16 +27,30 @@ def index():
 @app.route('/add', methods=['GET', 'POST'])
 def add_expense():
     if request.method == 'POST':
-        amount = float(request.form['amount'])
-        category = request.form['category']
-        date = request.form['date'] or datetime.now().strftime('%Y-%m-%d')
-
+        amount = request.form.get('amount')
+        category = request.form.get('category')
+        date = request.form.get('date') or datetime.now().strftime('%Y-%m-%d')
+        
+        if not amount or not category:
+            return "Amount and Category are required", 400
+        
         expenses = load_expenses()
-        expenses.append({'amount': amount, 'category': category, 'date': date})
+        expenses.append({'amount': float(amount), 'category': category, 'date': date})
         save_expenses(expenses)
-
         return redirect(url_for('index'))
-    return render_template('add.html')
+    
+    return '''
+    <html><body>
+    <h2>Add Expense</h2>
+    <form method="post">
+        Amount: <input type="number" step="0.01" name="amount" required><br>
+        Category: <input type="text" name="category" required><br>
+        Date: <input type="date" name="date"><br>
+        <input type="submit" value="Add">
+    </form>
+    <a href="/">Back</a>
+    </body></html>
+    '''
 
 @app.route('/summary')
 def summary():
@@ -45,7 +60,16 @@ def summary():
     for e in expenses:
         by_category[e['category']] += e['amount']
 
-    return render_template('summary.html', total=total, by_category=by_category)
+    summary_html = f"""
+    <html><body>
+    <h2>Summary</h2>
+    <p><strong>Total Spending:</strong> ₹{total}</p>
+    <h3>Spending by Category:</h3>
+    """
+    for category, amount in by_category.items():
+        summary_html += f"<p><strong>{category}:</strong> ₹{amount}</p>"
+    summary_html += '<a href="/">Back</a></body></html>'
+    return summary_html
 
 if __name__ == '__main__':
     app.run(debug=True)
