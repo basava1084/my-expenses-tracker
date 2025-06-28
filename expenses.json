@@ -1,32 +1,27 @@
 [
     {
-        "amount": 123.0,
-        "category": "123",
-        "date": "2025-06-26"
-    },
-    {
-        "amount": 1000.0,
-        "category": "tiffin",
+        "amount": "5000",
+        "category": "Shopping",
         "date": "2025-06-27"
     },
     {
-        "amount": 1200.0,
-        "category": "mutton",
+        "amount": "30000",
+        "category": "Health",
+        "date": "2025-06-19"
+    },
+    {
+        "amount": "7000",
+        "category": "Food",
+        "date": "2025-06-01"
+    },
+    {
+        "amount": "600",
+        "category": "Entertainment",
         "date": "2025-06-25"
     },
     {
-        "amount": 1222.0,
-        "category": "lunch",
+        "amount": "10000",
+        "category": "Other",
         "date": "2025-06-26"
-    },
-    {
-        "amount": 60000.0,
-        "category": "rent",
-        "date": "2025-06-27"
-    },
-    {
-        "amount": 1000.0,
-        "category": "birthday",
-        "date": "2025-06-25"
     }
 ]

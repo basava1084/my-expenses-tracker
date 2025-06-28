@@ -1,121 +1,118 @@
-/* style.css for Personal Expense Tracker with improved background and modern UI */
+<!-- Extraordinary, Beautiful, Box-Style Buttons summary.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expense Summary</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .button-box {
+            display: inline-block;
+            padding: 16px 24px;
+            margin: 10px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border-radius: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        .button-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+        }
+        .button-box.secondary {
+            background: linear-gradient(135deg, #64748b, #475569);
+        }
+        .button-box.highlight {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Expense Summary</h1>
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        <div class="button-group">
+            <a href="/add" class="button-box">➕ Add Expense</a>
+            <a href="/summary" class="button-box highlight">📊 Refresh Summary</a>
+            <a href="/" class="button-box secondary">🏠 Home</a>
+        </div>
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #89f7fe, #66a6ff);
-    color: #333;
-    padding: 20px;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-attachment: fixed;
-}
+        <canvas id="expenseChart" width="400" height="300" class="chart-canvas"></canvas>
+        <script>
+            const ctx = document.getElementById('expenseChart').getContext('2d');
+            const data = {
+                labels: {{ summary.keys() | list | tojson }},
+                datasets: [{
+                    label: 'Expenses by Category',
+                    data: {{ summary.values() | list | tojson }},
+                    backgroundColor: [
+                        '#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#22d3ee'
+                    ],
+                    borderRadius: 12,
+                    borderSkipped: false
+                }]
+            };
+            const config = {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#f1f5f9', stepSize: 10 }
+                        },
+                        x: {
+                            ticks: { color: '#f1f5f9' }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: { color: '#f1f5f9' }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1e293b',
+                            titleColor: '#fbbf24',
+                            bodyColor: '#f1f5f9'
+                        }
+                    }
+                }
+            };
+            new Chart(ctx, config);
+        </script>
 
-.container {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-    width: 95%;
-    max-width: 600px;
-    backdrop-filter: blur(10px);
-}
+        <table>
+            <thead>
+                <tr>
+                    <th>📂 Category</th>
+                    <th>💰 Total Spent</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category, amount in summary.items() %}
+                <tr>
+                    <td>{{ category }}</td>
+                    <td>${{ '%.2f'|format(amount) }}</td>
+                </tr>
+                {% endfor %}
+                {% if summary|length == 0 %}
+                <tr>
+                    <td colspan="2">No expenses recorded to summarize yet.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        <h3 class="total-display">🧾 Total Spending: <strong>${{ '%.2f'|format(total) }}</strong></h3>
 
-h1, h2 {
-    text-align: center;
-    color: #1f2f46;
-    margin-bottom: 20px;
-}
-
-.button, .nav-buttons a {
-    display: inline-block;
-    text-align: center;
-    margin: 10px 5px;
-    padding: 12px 20px;
-    text-decoration: none;
-    color: #fff;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border-radius: 10px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    font-weight: 500;
-}
-
-.button:hover, .nav-buttons a:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-}
-
-.expense-card, .summary-item {
-    background: #ffffff;
-    padding: 18px;
-    border-left: 6px solid #764ba2;
-    border-radius: 12px;
-    margin: 12px 0;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.06);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.expense-card:hover, .summary-item:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.1);
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-form label {
-    font-weight: 600;
-    color: #2c3e50;
-}
-
-form input[type="text"],
-form input[type="number"],
-form input[type="date"] {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border 0.3s, box-shadow 0.3s;
-}
-
-form input[type="text"]:focus,
-form input[type="number"]:focus,
-form input[type="date"]:focus {
-    border-color: #764ba2;
-    box-shadow: 0 0 8px rgba(118, 75, 162, 0.3);
-    outline: none;
-}
-
-form input[type="submit"] {
-    padding: 12px;
-    background: linear-gradient(135deg, #43cea2, #185a9d);
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
-}
-
-form input[type="submit"]:hover {
-    background: linear-gradient(135deg, #36b192, #154c8c);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-}
-
-.no-expenses {
-    text-align: center;
-    color: #555;
-    font-style: italic;
-    margin-top: 12px;
-}
+        <div class="button-group">
+            <a href="/add" class="button-box">➕ Add Another Expense</a>
+            <a href="/" class="button-box secondary">🏠 Return Home</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Expense Tracker</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-box {
+            background: rgba(30, 41, 59, 0.92);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .login-box h1 {
+            color: #38bdf8;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        .form-group {
+            margin: 15px 0;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #fbbf24;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            background: #1e293b;
+            color: #f1f5f9;
+            font-size: 1rem;
+        }
+        .form-group input:focus {
+            outline: 2px solid #38bdf8;
+            background: #0f172a;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            width: 100%;
+            margin-top: 15px;
+            font-size: 1rem;
+        }
+        .button:hover {
+            background: linear-gradient(135deg, #1d4ed8, #2563eb);
+        }
+        .secondary-button {
+            background: linear-gradient(135deg, #64748b, #475569);
+            margin-top: 10px;
+        }
+        .secondary-button:hover {
+            background: linear-gradient(135deg, #475569, #64748b);
+        }
+        .flash-messages {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+        .flash {
+            background: #ef4444;
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h1>🔐 Login to Your Expense Tracker</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flash-messages">
+                    {% for category, message in messages %}
+                        <li class="flash">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form method="POST">
+            <div class="form-group">
+                <label for="email">📧 Email</label>
+                <input type="email" name="email" id="email" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="password">🔒 Password</label>
+                <input type="password" name="password" id="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="button">✅ Login</button>
+            <a href="/register" class="button secondary-button">📝 Create New Account</a>
+            <a href="/forgot_password" class="button secondary-button">❓ Forgot Password?</a>
+        </form>
+    </div>
+</body>
+</html>
